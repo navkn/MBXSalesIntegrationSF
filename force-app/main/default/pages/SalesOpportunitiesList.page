@@ -1,0 +1,64 @@
+<apex:page controller="CustomPaginationSearch" action="{!searchOpp}" >
+
+ <apex:form >
+  <apex:pageBlock id="thePb" title="Opportunity Details To Search" >
+   <apex:pageblockSection id="thepbs" columns="2" >
+       <apex:inputText value="{!sName}" required="false" label="Name"/>
+        <apex:inputText value="{! sAccountName}" required="false" label="Account Name"/>
+        <apex:inputField value="{!opp.StageName}" required="false" label="Stage"/>
+        <apex:inputField value="{!opp.Type}" required="false" label="Type"/>
+        <apex:inputText value="{!sAmount}" required="false" label="Amount"/>
+   </apex:pageblockSection>
+   <apex:pageblockButtons location="bottom">
+      <apex:commandButton value="Search" action="{!searchOpp}" />
+       <apex:commandButton value="Clear" action="{!conditionsClear}" />
+     </apex:pageblockButtons>  
+  </apex:pageBlock>
+  
+   <apex:pageBlock title="Opportunity Details" id="noRec" rendered="{! IF( oppList != null && oppList.size ==0 , true, false)}" >
+  <apex:outputPanel >
+    <h1>No Records Found </h1>
+</apex:outputPanel>
+  </apex:pageBlock>
+
+  </apex:form>
+    
+  
+  <apex:pageBlock title="Opportunity Details"  id="opp_list" rendered="{! IF( oppList != null && oppList.size >0, true, false)}" >
+  <apex:form >
+   <apex:pageBlockTable value="{!oppList}" var="a"  >
+       <apex:column ><apex:commandButton action="{!shareRecord}" value="Send"  rerender="opp_list" disabled="{! If(a.Integration_Status__c =='SUCCESS',true,false)}" >
+           <apex:param name="shareId" value="{!a.Id}" id="shareId" />
+           </apex:commandButton></apex:column>
+       <apex:column ><apex:commandButton action="{!editRecord}" value="edit"  rerender="opp_list"  >
+           <apex:param name="editId" value="{!a.Id}" id="editId" />
+           </apex:commandButton> </apex:column>
+       <apex:column headerValue="Opportunity Name">
+           <apex:commandLink action="{! navigateToRecord}" value="{! a.Name}">  <apex:param name="viewId" value="{!a.Id}"/> </apex:commandLink> 
+       </apex:column>   
+    <apex:column headerValue="Account Number">
+        <apex:outputLink target="_blank" value="/{!a.Account.id}">{!a.Account.Name}</apex:outputLink>
+       </apex:column> 
+    <apex:column value="{!a.StageName}" headerValue="Stage"/>  
+    <apex:column value="{!a.Type}" headerValue="Type"/>  
+ 	 <apex:column value="{!a.Amount}" headerValue="Amount"/>   
+      
+   </apex:pageBlockTable>
+   
+ 
+     <apex:panelGrid columns="4" width="100%">
+ <apex:commandButton value="First Page" rerender="opp_list" action="{!FirstPage}" disabled="{!prev}"/>
+<apex:commandButton value="Previous" rerender="opp_list" action="{!previous}" disabled="{!prev}"/>
+<apex:commandButton value="Next" rerender="opp_list" action="{!next}" disabled="{!nxt}"/>
+<apex:commandButton value="Last Page" rerender="opp_list" action="{!LastPage}" disabled="{!nxt}" />
+     </apex:panelGrid>
+     </apex:form>
+  </apex:pageBlock>
+<apex:pageBlock >
+    
+    <analytics:reportChart reportId="00O2w000006gdtm" size="small"></analytics:reportChart>
+    
+    </apex:pageBlock>
+ 
+    
+</apex:page>

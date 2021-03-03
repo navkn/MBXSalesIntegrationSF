@@ -1,0 +1,15 @@
+<!--<aura:component implements="force:lightningQuickAction,
+                            force:appHostable,
+                            flexipage:availableForAllPageTypes,
+                            flexipage:availableForRecordHome,
+                            force:hasRecordId,
+                            force:hasSObjectName,
+                            forceCommunity:availableForAllPageTypes,
+                            lightning:actionOverride,
+                            lightning:isUrlAddressable" access="global" >
+    	<c:	mobSupportRecordEditFormRetrieveLookupId aId="{!v.recordId}" SObjectType="{!v.sObjectName}"></c:mobSupportRecordEditFormRetrieveLookupId>
+</aura:component>
+-->
+<aura:component implements="force:lightningQuickAction,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes,lightning:actionOverride,lightning:isUrlAddressable" access="global" >
+    	<c:mobSupportRecordEditFormRetrieveLookupId></c:mobSupportRecordEditFormRetrieveLookupId>
+</aura:component>

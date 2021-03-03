@@ -1,0 +1,46 @@
+<apex:page controller="CustomOpportunityRecordPageController" recordSetVar="{!opp}">
+     <apex:form rendered="{! mode=='EDIT'}">
+      <apex:pageBlock title="Opportunity EDIT" mode="edit">
+         
+    		<apex:pageBlockSection title="Edit Opportunity" collapsible="false" columns="2">
+                <apex:inputField value="{!opp.Name}" label="Opportunity Name"/>
+                <apex:inputField value="{!opp.Account.Name}" />
+                <apex:inputField value="{!opp.Amount}" />
+                <apex:inputField value="{!opp.StageName}" />
+                <apex:inputField value="{!opp.Type}" />
+                <apex:inputField value="{!opp.CloseDate}" />
+                <apex:inputField value="{!opp.Integration_Status__c}"  rendered="{! ProfileName == 'System Administrator'}"/>
+                <apex:inputField value="{!opp.Integration_Comments__c}" rendered="{! ProfileName == 'System Administrator' }"/>
+       			<apex:inputField value="{!opp.Probability}" />
+                <apex:inputField value="{!opp.CloseDate}" />
+             
+         	</apex:pageBlockSection>
+            <apex:pageblockButtons location="bottom">
+      			<apex:commandButton value="save" action="{!saveRecord}" />
+      			<apex:commandButton value="Cancel" action="{!cancelRecord}" />
+     		</apex:pageblockButtons>  
+         
+    </apex:pageBlock>
+              </apex:form>
+    <apex:form rendered="{! mode == 'VIEW'}">
+     		<apex:pageBlock title="Opportunity detail VIEW" mode="detail">
+                <apex:pageBlockSection title="View Opportunity" collapsible="false" columns="2">
+                    <apex:outputField value="{! opp.Name}"/>
+                <apex:outputField value="{!opp.Account.Name}" />
+                <apex:outputField value="{!opp.Amount}" />
+                <apex:outputField value="{!opp.StageName}" />
+                <apex:outputField value="{!opp.Type}" />
+                <apex:outputField value="{!opp.CloseDate}" />
+                <apex:outputField value="{!opp.Integration_Status__c}" />
+                    <apex:outputField value="{!opp.Integration_Comments__c}" />
+       			<apex:outputField value="{!opp.Probability}" />
+                <apex:outputField value="{!opp.CloseDate}" />
+                </apex:pageBlockSection>
+            <apex:pageblockButtons location="bottom">
+      			<apex:commandButton value="Edit" action="{!editRecord}" />
+                <apex:commandButton value="Send" action="{!shareRecord}" />
+      			<apex:commandButton value="Cancel" action="{!cancelRecord}" />
+     		</apex:pageblockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

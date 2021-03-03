@@ -1,0 +1,50 @@
+<apex:page controller="opportunitiesCustomized"
+           tabstyle="Opportunity" sidebar="true" showHeader="true" showQuickActionVfHeader="true">
+    <apex:form >
+        <apex:panelGrid columns="5">
+            <!-- <apex:inputText value="{!NameFromVF}" onchange="{!changeName}"/> -->
+            <apex:inputText value="{!NameFromVF}" />
+            <apex:inputText />
+            <apex:inputText />
+            <apex:inputText />
+            <apex:inputText />
+            <apex:actionSupport event="onchange" reRender="opp_list"/>
+    </apex:panelGrid>
+        </apex:form>
+     
+    
+    <apex:pageBlock id="opp_list">
+        
+        <apex:pageBlockTable value="{! opportunities}" var="oppRec">
+        <apex:column value="{!oppRec.Name}"/>
+        <apex:column value="{!oppRec.Account.Name}"/>
+        <apex:column value="{!oppRec.Amount}"/>
+        <apex:column value="{!oppRec.Type}"/>
+        <apex:column value="{!oppRec.StageName}"/>
+        </apex:pageBlockTable>
+         <apex:form >
+        <table style="width: 100%">
+        <tr>
+            <td>Page:{!ssc.PageNumber} of {!ceiling(ssc.ResultSize/ssc.PageSize)}</td>
+            <td align="center">
+                <apex:commandLink value="<< Previous" action="{! ssc.Previous}" rendered="{!ssc.HasPrevious}"/>
+                <apex:outputText value="<< Previous" rendered="{! Not(ssc.HasPrevious)}"/>&nbsp;&nbsp;|
+                <apex:commandLink value="Next >>" action="{! ssc.Next}" rendered="{!ssc.HasNext}"/>
+                <apex:outputText value="Next >>" rendered="{! Not(ssc.HasNext)}"/>
+         
+            </td>
+            <td>
+                <apex:selectList value="{! ssc.PageSize}"  size="1">
+                    <apex:selectOption itemValue="5"    itemLabel="5"/>
+                     <apex:selectOption itemValue="15" itemLabel="15"/>
+                     <apex:selectOption itemValue="20" itemLabel="20"/>
+                    <apex:actionSupport event="onchange" reRender="opp_list"/>
+                </apex:selectList>
+            </td>
+        
+        </tr>
+    </table>
+    
+     </apex:form>
+   </apex:pageBlock>
+</apex:page>

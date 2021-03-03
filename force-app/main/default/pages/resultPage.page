@@ -1,0 +1,24 @@
+<apex:page controller="ResultPageController">
+    <script type="text/javascript">
+    window.onload = function() { 
+        setTimeout(function(){
+            var url=window.location.origin;
+            url= url + '/apex/SalesOpportunitiesList';
+            console.log(url);
+            window.location.replace(url);
+        }, 5000);
+    }
+    
+    </script>
+    <apex:pageBlock rendered="{! type == 'SUCCESS'}">
+        Yay! The transaction has been performed successfully and Here is the status message: {!message}
+    </apex:pageBlock>
+    
+    <apex:pageBlock rendered="{! type == 'ERROR'}">
+         Sorry! The transaction has been failed due to an error And here is the error: {!message}
+    </apex:pageBlock>
+    
+    <apex:pageBlock rendered="{! type != 'ERROR' && type!='SUCCESS' }">
+         Here is the status message: {!message}
+    </apex:pageBlock>
+</apex:page>

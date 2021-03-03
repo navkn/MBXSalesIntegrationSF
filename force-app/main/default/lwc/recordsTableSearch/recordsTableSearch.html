@@ -1,0 +1,96 @@
+<template>
+    <div if:true={editRecord}>
+        <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal_header slds-modal_header_empty">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close">
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h>Edit Opportunity</h>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+
+                    <lightning-input label="Opportunity Name" value={oppName} type="text" required
+                        onchange={oppNameChange}></lightning-input>
+                    <c-certlookupcomponent object-name='Account' field-name="Name" label="Account Name" 
+                    parentidfield="AccountId"  predefined-record={opp}  onselect={handleAccountChange}></c-certlookupcomponent>
+
+                    <lightning-input label="Amount" value={oppAmount} type="Number" required
+                        onchange={oppAmountChange}></lightning-input>
+                    <lightning-combobox label="Type" value={oppType} placeholder="Select Type" options={TypeOptions}
+                        onchange={oppTypeChange}></lightning-combobox>
+                    <lightning-combobox label="Stage Name" value={oppStageName} placeholder="Select Stage"
+                        options={StageNameOptions} onchange={oppStageNameChnage}></lightning-combobox>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closepopup}>
+                        Cancel
+                    </button>
+                    <button class="slds-button slds-button_brand" onclick={updateOpp}>
+                        Update
+                    </button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+    <div class="slds-m-around_xx-large">
+        <div class="slds-clearfix">
+            <div class="slds-page-header" role="banner">
+                <p class="slds-page-header__title">Opportunities</p>
+            </div>
+            <div>
+                <lightning-layout>
+                    <lightning-layout-item flexibility="Auto" padding="around-small">
+
+                        <lightning-input type="text" label=" Name" placeholder="Opportunity Names"
+                            onchange={handleOppNameSearch}>
+                        </lightning-input>
+
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="Auto" padding="around-small">
+
+                        <lightning-input type="text" label="Account Name" placeholder="Account Name"
+                            onchange={handleAccNameSearch}>
+                        </lightning-input>
+
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small" size="2">
+                        <lightning-combobox label="Stage Name" value="" placeholder="Select Stage"
+                            options={StageNameOptions} onchange={handleStageSearch}></lightning-combobox>
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small" size="2">
+
+                        <lightning-combobox label="Type" value="" placeholder="Select Type" options={TypeOptions}
+                            onchange={handleTypeSearch}></lightning-combobox>
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small" size="2">
+
+                        <lightning-input type="text" label="Amount" placeholder="Amount" onchange={handleAmountSearch}>
+                        </lightning-input>
+
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+
+        </div>
+
+        <lightning-datatable key-field="id" hide-checkbox-column data={oppList} columns={columns}
+            onrowaction={handleRowActions}>
+        </lightning-datatable>
+        <div class="slds-clearfix">
+            <div class="slds-page-header" role="banner">
+                <div class="slds-float_right">
+                    <lightning-button label="Prev" onclick={prevPage} disabled={prevButtonDisabled}></lightning-button>
+                    <lightning-button label="Next" onclick={nextPage} disabled={nextButtonDisabled}></lightning-button>
+
+                </div>
+                <div>
+                    <p> Page {currentPage} of {noOfPages} </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

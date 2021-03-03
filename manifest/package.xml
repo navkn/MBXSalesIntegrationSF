@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+	<types>
+		<members>*</members>
+		<name>ApexClass</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>ApexPage</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>AuraDefinitionBundle</name>
+	</types>
+	<types>
+		<members>standard__LightningSales</members>
+		<members>standard__Sales</members>
+		<members>standard__SalesforceCMS</members>
+		<name>CustomApplication</name>
+	</types>
+	<types>
+		<members>Opportunity.Integration_Comments__c</members>
+		<members>Opportunity.Integration_Status__c</members>
+		<name>CustomField</name>
+	</types>
+	<types>
+		<members>Opportunity-Opportunity Layout</members>
+        <members>Account-Account Layout</members>
+		<name>Layout</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>CustomTab</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>FlexiPage</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>LightningComponentBundle</name>
+	</types>
+	<types>
+		<members>Account.CreateOpportunityLightningQuickAction</members>
+		<members>NewOpportunity</members>
+		<name>QuickAction</name>
+	</types>
+    
+	<types>
+		<members>ApexDevNet</members>
+		<members>Integrate_Opportunities</members>
+		<name>RemoteSiteSetting</name>
+	</types>
+	<types>
+		<members>unfiled$public/Opportunities_Integration_Report_tQT</members>
+		<name>Report</name>
+	</types>
+	<types>
+        <members>*</members>
+        <name>PermissionSet</name>
+    </types>
+    <types>
+		<members>Opportunity.CustomNewOpp</members>
+		<name>WebLink</name>
+	</types>
+	<version>50.0</version>
+</Package>
+

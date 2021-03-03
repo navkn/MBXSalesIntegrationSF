@@ -1,0 +1,71 @@
+<template>
+    <div if:true={predefinedRecord}>
+        <label class="slds-form-element__label" for="unique-id-of-input">
+            {label}
+        </label>
+        <div class="slds-pill-container">
+            <!-- <lightning-pill class="pillSize" href="JavaScript:void(0);" label={predefinedRecord.Name}
+                name={predefinedRecord.Id} onremove={handleRemove}>
+                <lightning-icon icon-name={iconname} variant="circle" alternative-text={objectName}>
+                </lightning-icon>
+            </lightning-pill> -->
+
+            <span class="slds-pill slds-pill_link" key={x} for:each={listLL} for:item="x" for:index="i">
+                <span onclick={handleRemove}>
+                    <span class="slds-pill__icon_container" >
+                        <span class="slds-icon_container slds-icon-standard-account" title="Account">
+                            <svg class="slds-icon" aria-hidden="true">
+                                <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Account</span>
+                        </span>
+                    </span>
+                    <a href="javascript:void(0);" class="slds-pill__action"
+                        title="Full pill label verbiage mirrored here">
+                        <span class="slds-pill__label">{predefinedRecord.Name}</span>
+                    </a>
+                    <!-- <button class="slds-button slds-button_icon slds-button_icon slds-pill__remove" onclick={handleRemove} title="Remove">
+                  <svg class="slds-button__icon" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                  </svg>
+                  <span class="slds-assistive-text">Remove</span>
+                </button> -->
+                </span>
+            </span>
+
+        </div>
+    </div>
+
+    <div if:false={predefinedRecord}>
+        <div class="slds-m-padding_around">
+            <template if:false={selectedRecord}>
+                <c-certsearchcomponent onsearch={hanldeSearch} search-label={label} isrequired="true">
+                </c-certsearchcomponent>
+            </template>
+        </div>
+        <div class="slds-m-padding_around">
+            <template if:false={selectedRecord}>
+                <template if:true={records}>
+                    <template for:each={records} for:item="rec" for:index="index">
+                        <ul key={rec.Id} class="slds-listbox ">
+                            <c-certrecordscomponent key={rec.Id} rec={rec} iconname={iconname} onselect={handleSelect}>
+                            </c-certrecordscomponent>
+                        </ul>
+                    </template>
+                </template>
+            </template>
+            <template if:true={selectedRecord}>
+                <label class="slds-form-element__label" for="unique-id-of-input">
+                    {label}
+                </label>
+                <div class="slds-pill-container">
+                    <lightning-pill class="pillSize" href="JavaScript:void(0);" label={selectedRecord.Name}
+                        name={selectedRecord.Name} onremove={handleRemove}>
+                        <lightning-icon icon-name={iconname} variant="circle" alternative-text={objectName}>
+                        </lightning-icon>
+                    </lightning-pill>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>
